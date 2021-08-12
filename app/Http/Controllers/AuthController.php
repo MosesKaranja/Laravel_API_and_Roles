@@ -54,10 +54,17 @@ class AuthController extends Controller
 
         $response = [
             'user'=>$user,
+            'user_roles'=>$user->getRoleNames(),
             'token'=>$token
         ];
 
+        //return User::where('email', $fields['email'])->first()->with('roles')->get()->where('email', $fields['email']);
+        
+        //return $user->with('roles')->get()->where('email', $fields['email']);
+
         return response($response, 201);
+
+
 
     }
 
@@ -72,5 +79,6 @@ class AuthController extends Controller
         return 'De String Returned';
 
     }
+
     
 }

@@ -25,6 +25,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::post('reset_password_without_token', [AuthController::class, 'validatePasswordRequest']);
+Route::post('reset_password_with_token', [AuthController::class, 'resetPassword']);
+
+
+
 Route::post('/experiment', [AuthController::class, 'experiment']);
 
 
