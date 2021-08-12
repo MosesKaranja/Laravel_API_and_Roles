@@ -42,7 +42,7 @@ class ProductController extends Controller
             'price' => 'required'
         ]);
 
-        return Product::create($request->all);
+        return Product::create($request->all());
         
     }
 
