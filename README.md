@@ -1,64 +1,65 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## About Repo
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This is a simple api that comes in Laravel And can peroform all CRUD requirements for a certain model.
+On top of that security has been added to the api using tokens from the package Laravel Sanctum.
+And also we have decided to add Roles and Permissions functionality from the Laravel Package Spatie
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Running The Project
+First remember to run the Seeder called PermissionsDemoSeeder, this sets up the Roles and Permissions which you will assign to users instead of creating them all the time when a user registers. 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Now you will just assign a user a role when a user registers. 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+In order to run any route remember to add Accept --- application/json to your Headers in Postman. 
 
-## Learning Laravel
+Also remember to first register or login and obtain the token. You will then add the token to Authorization - Bearer Token to the other routes otherwise they will reject your request.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+## The Routes
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+#InsertProduct Route
+http://127.0.0.1:8000/api/products  ---- POST
 
-### Premium Partners
+Parameters required are 4 but description is optional:name, slug, description, price. 
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
+#GetProducts Route
+http://127.0.0.1:8000/api/products  ---- GET
 
-## Contributing
+No Parameters are required
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#register Route
+http://127.0.0.1:8000/api/register ---- POST
 
-## Code of Conduct
+Parameters required are 4: name, email, password, password_confirmation 
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#login Route
+http://127.0.0.1:8000/api/login ---- POST
 
-## Security Vulnerabilities
+Parameters required are 2: email, password
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#logout Route
+http://127.0.0.1:8000/api/logout ---- POST
 
-## License
+No Parameter are required
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-"# Laravel_API_and_Roles" 
+#GetProductById
+http://127.0.0.1:8000/api/products/{id} ----GET
+
+
+No Parameters are required
+
+#SearchProductByName
+http://127.0.0.1:8000/api/products/search/{name} ---- GET
+
+No Parameters are required here
+
+#DeleteProductById
+http://127.0.0.1:8000/api/products/{id} ---- DELETE
+
+No Parameters are required here
+
+#UpdateProduct
+http://127.0.0.1:8000/api/products/{id} ---- PUT
+
+No Parameters are required here. 

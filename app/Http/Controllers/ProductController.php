@@ -54,6 +54,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
+        if(Product::find($id) == null){
+            return response(["products"=>"No Products Found"]);
+        }
         return Product::find($id);
         
     }
@@ -78,6 +81,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        if($id == null){
+            return response(["id_required"=>"ID is required"]);
+        }
+
+        $request->validate([
+            'name' => 'required',
+            'slug' => 'required',
+            'price' => 'required'
+        ]);
+
         $product = Product::find($id);
         $product->update($request->all());
         return $product;
@@ -97,6 +111,9 @@ class ProductController extends Controller
     }
 
     public function search($name){
+        if(count(Product::where('name','like','%'.$name.'%')->get()) == 0){
+            return response(["products"=>"No Products Found"]);
+        }
         return Product::where('name','like','%'.$name.'%')->get();
 
     }

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
+use Spatie\Permission\Models\Role;
+
 class AuthController extends Controller
 {
     public function register(Request $request){
@@ -23,11 +25,13 @@ class AuthController extends Controller
         ]);
 
         $token = $user->createToken('myapptoken')->plainTextToken;
+        $user->assignRole(Role::all()->pluck('name')[0]);
 
         $response = [
             'user' => $user,
             'token' => $token
         ];
+
 
         return response($response, 201);
 
